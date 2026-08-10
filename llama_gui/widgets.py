@@ -13,8 +13,26 @@ def create_param_widgets(root: tk.Frame, groups: list[ParamGroup]) -> dict[str, 
         frame = ttk.LabelFrame(root, text=group.name.replace('_', ' ').title())
         frame.pack(fill="x", padx=10, pady=5, expand=True)
 
+        collapsed_var = tk.BooleanVar(value=False)  # False = expanded
+        toggle_btn = ttk.Button(frame, text="▼", width=2)
+        toggle_btn.pack(side="right")
+
+        content_frame = tk.Frame(frame)
+        content_frame.pack(fill="x", expand=True)
+
+        def on_toggle(v=collapsed_var, btn=toggle_btn, cf=content_frame):
+            if v.get():
+                cf.pack_forget()
+                btn.config(text="▶")
+            else:
+                cf.pack(fill="x", expand=True)
+                btn.config(text="▼")
+
+        collapsed_var.trace_add("write", on_toggle)
+        toggle_btn.config(command=lambda: collapsed_var.set(not collapsed_var.get()))
+
         for param in group.params:
-            container = tk.Frame(frame)
+            container = tk.Frame(content_frame)
             container.pack(fill="x", padx=5, pady=2, anchor="w")
 
             label = tk.Label(container, text=param.description, anchor="w")
@@ -75,3 +93,21 @@ def set_widget_values(widgets: dict[str, tk.Variable], values: dict[str, str | i
                 var.set(str(value))
         except Exception as e:
             print(f"Warning: Error setting {name}: {e}")
+
+def clear_all(widgets: dict[str, tk.Variable], groups: list[ParamGroup]) -> None:
+    """Reset all widgets to default values."""
+    values = {}
+    for group in groups:
+        for param in group.params:
+            default = param.default
+            if param.param_type == "flag":
+                values[param.long_name] = False
+            elif param.param_type == "bool":
+                values[param.long_name] = False
+            elif param.param_type == "int":
+                values[param.long_name] = int(default) if default else 0
+            elif param.param_type == "choice":
+                values[param.long_name] = param.choices[0] if param.choices else ""
+            else:  # string
+                values[param.long_name] = default or ""
+    set_widget_values(widgets, values)

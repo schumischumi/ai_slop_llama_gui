@@ -3,7 +3,7 @@ from tkinter import ttk, messagebox, simpledialog
 import subprocess
 from pathlib import Path
 from llama_gui.parser import HelpParser
-from llama_gui.widgets import create_param_widgets, collect_widget_values, set_widget_values
+from llama_gui.widgets import create_param_widgets, collect_widget_values, set_widget_values, clear_all
 from llama_gui.command_builder import build_command
 from llama_gui.command_parser import parse_command
 from llama_gui.profile_manager import ProfileManager
@@ -13,6 +13,7 @@ class LlamaGuiApp:
         self.root = tk.Tk()
         self.root.title("Llama Server Configurator")
         self.root.geometry("600x700")
+        self.root.minsize(800, 600)
 
         # Main container
         self.main_frame = ttk.Frame(self.root)
@@ -24,7 +25,7 @@ class LlamaGuiApp:
         self.scrollable_frame = ttk.Frame(self.canvas)
 
         self.scrollable_frame.bind(
-            "<Configure>",
+            "<Configure",
             lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
         )
 
@@ -81,7 +82,7 @@ class LlamaGuiApp:
             self.status_var.set(f"Help loaded: {param_count} params in {len(self.groups)} groups")
 
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to load parameters:\n{e}")
+            messagebox.showerror("llama-server not found", f"Failed to load parameters:\n{e}")
             self.status_var.set("Error loading parameters.")
 
     def setup_control_panel(self):
@@ -99,6 +100,7 @@ class LlamaGuiApp:
         ttk.Button(profile_toolbar, text="Load", command=self.on_load).pack(side="left", padx=2)
         ttk.Button(profile_toolbar, text="Save", command=self.on_save).pack(side="left", padx=2)
         ttk.Button(profile_toolbar, text="Delete", command=self.on_delete).pack(side="left", padx=2)
+        ttk.Button(profile_toolbar, text="Clear All", command=self.on_clear_all).pack(side="left", padx=2)
 
         # Control panel
         control_frame = ttk.LabelFrame(self.main_frame, text="Command Control")
@@ -141,7 +143,7 @@ class LlamaGuiApp:
                 self.profile_manager.save(name, collect_widget_values(self.vars_dict))
                 self.update_profile_list()
             except Exception as e:
-                messagebox.showerror("Error", f"Failed to save profile: {e}")
+                messagebox.showerror("Save failed", f"{e}")
 
     def on_load(self):
         name = self.profile_var.get()
@@ -152,9 +154,9 @@ class LlamaGuiApp:
             set_widget_values(self.vars_dict, values)
             self.update_preview()
         except Exception as e:
-            messagebox.showerror("Error", f"Failed to load profile: {e}")
+            messagebox.showerror("Load failed", f"{e}")
 
-    def on_delete(self):
+    def on_delete(self: None) -> None:
         name = self.profile_var.get()
         if not name:
             return
@@ -165,7 +167,7 @@ class LlamaGuiApp:
                 else:
                     messagebox.showwarning("Warning", "Profile not found.")
             except Exception as e:
-                messagebox.showerror("Error", f"Failed to delete profile: {e}")
+                messagebox.showerror("Delete failed", f"{e}")
 
     def update_preview(self):
         if not self.vars_dict:
@@ -192,6 +194,13 @@ class LlamaGuiApp:
             self.update_preview()
         except Exception as e:
             messagebox.showerror("Parse Error", f"Failed to parse command:\n{e}")
+
+    def on_clear_all(self):
+        try:
+            clear_all(self.vars_dict, self.groups)
+            self.update_preview()
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to clear all: {e}")
 
     def run(self):
         self.root.mainloop()

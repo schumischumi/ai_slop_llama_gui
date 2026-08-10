@@ -10,7 +10,7 @@
 
 **Estimated stories:** 4
 
-**Next story:** 4
+**Next story:** 5
 
 ## Status Board
 
@@ -19,7 +19,7 @@
 | 1 | Help parser + widget factory + basic UI | done | [pending] |
 | 2 | Command builder + live preview + command parser + paste-to-UI | done | d2f06b1 |
 | 3 | Profile system (save/load/delete) | done | 3730beb |
-| 4 | Polish: copy, clear, error handling, collapsible groups | in-progress | - |
+| 4 | Polish: copy, clear, error handling, collapsible groups | done | 1c72149b7a335310758dbc8c83351a7444acb52e |
 
 ## Dependencies
 
