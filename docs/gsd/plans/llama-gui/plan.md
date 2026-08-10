@@ -10,14 +10,14 @@
 
 **Estimated stories:** 4
 
-**Next story:** 2
+**Next story:** 3
 
 ## Status Board
 
 | # | Title | Status | Commit |
 |---|-------|--------|--------|
 | 1 | Help parser + widget factory + basic UI | done | [pending] |
-| 2 | Command builder + live preview + command parser + paste-to-UI | in-progress | - |
+| 2 | Command builder + live preview + command parser + paste-to-UI | done | d2f06b1 |
 | 3 | Profile system (save/load/delete) | pending | - |
 | 4 | Polish: copy, clear, error handling, collapsible groups | pending | - |
 
