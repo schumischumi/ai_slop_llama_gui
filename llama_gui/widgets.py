@@ -65,6 +65,12 @@ def create_param_widgets(root: tk.Frame, groups: list[ParamGroup]) -> dict[str, 
 
     return vars_dict
 
+def collect_widget_values(widgets: dict[str, tk.Variable]) -> dict[str, any]:
+    """Collect all values from the given widgets dictionary.
+    Returns a dict mapping param long_name to its current value.
+    """
+    return {name: var.get() for name, var in widgets.items()}
+
 def set_widget_values(widgets: dict[str, tk.Variable], values: dict[str, str | int | bool]) -> None:
     """Set Tkinter variable values from a dict.
     Skips params not in widgets dict.

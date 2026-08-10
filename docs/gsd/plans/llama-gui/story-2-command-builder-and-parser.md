@@ -14,7 +14,7 @@
 **File summaries:**
 
 - `llama_gui/command_builder.py` — `build_command(widgets: dict[str, tk.Variable], params: list[ParamGroup]) -> str`. Iterates widget values, emits appropriate CLI tokens, skips defaults.
-- `llama_gui/command_parser.py` — `parse_command(command: str, params: list[ParamGroup]) -> dict[str, str | int | bool]`. Tokenizes, matches against param registry, returns dict.
+- `llama_gui/command_parser.py` — `parse_command(command: str, groups: list[ParamGroup]) -> dict[str, str | int | bool]`. Tokenizes, matches against param registry, returns dict.
 - `llama_gui/widgets.py` — `collect_widget_values(widgets: dict[str, tk.Variable]) -> dict[str, str | int | bool]`. Reads current values from Tkinter variables.
 - `llama_gui/main.py` — adds a `tk.Text` widget for command preview (read-only, single-line), a `tk.Entry` for paste field, a "Parse →" button, and `trace_add` callbacks on all widgets to update preview live.
 
@@ -41,7 +41,6 @@ def parse_command(command: str, groups: list[ParamGroup]) -> dict[str, str | int
 def collect_widget_values(widgets: dict[str, tk.Variable]) -> dict[str, str | int | bool]:
     """Read current values from Tkinter variables.
     Returns dict mapping param_name to Python value (int/str/bool).
-    BooleanVar values come as 0/1 from tkinter, convert to False/True.
     """
 ```
 
@@ -92,15 +91,15 @@ def collect_widget_values(widgets: dict[str, tk.Variable]) -> dict[str, str | in
 **Depends on:** Story 1
 
 **Tasks:**
-- [ ] Write `command_builder.py` with `build_command()`
-- [ ] Write `command_parser.py` with `parse_command()`
-- [ ] Write `tests/test_command_builder.py` — unit tests
-- [ ] Write `tests/test_command_parser.py` — unit tests
-- [ ] Update `widgets.py` — add `collect_widget_values()`
-- [ ] Update `main.py` — add preview panel, paste field, trace callbacks
-- [ ] Run `pytest tests/` — confirm green
-- [ ] Manual test: live preview updates on widget change
-- [ ] Manual test: paste command → widgets update
+- [x] Write `command_builder.py` with `build_command()`
+- [x] Write `command_parser.py` with `parse_command()`
+- [x] Write `tests/test_command_builder.py` — unit tests
+- [x] Write `tests/test_command_parser.py` — unit tests
+- [x] Update `widgets.py` — add `collect_widget_values()`
+- [x] Update `main.py` — add preview panel, paste field, trace callbacks
+- [x] Run `pytest tests/` — confirm green
+- [x] Manual test: live preview updates on widget change
+- [x] Manual test: paste command → widgets update
 
 **Resume note:** -
 **Open questions:** none

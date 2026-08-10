@@ -25,7 +25,7 @@ class LlamaGuiApp:
         self.scrollable_frame = ttk.Frame(self.canvas)
 
         self.scrollable_frame.bind(
-            "<Configure",
+            "<Configure>",
             lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all"))
         )
 
