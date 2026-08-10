@@ -1,5 +1,7 @@
 import tkinter as tk
-from llama_gui.parser import Param, ParamGroup
+
+from llama_gui.parser import ParamGroup
+
 
 def build_command(widgets: dict[str, tk.Variable], groups: list[ParamGroup]) -> str:
     """Build llama-server command string from widget values.

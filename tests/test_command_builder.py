@@ -1,7 +1,9 @@
-import unittest
 import tkinter as tk
-from llama_gui.parser import Param, ParamGroup
+import unittest
+
 from llama_gui.command_builder import build_command
+from llama_gui.parser import Param, ParamGroup
+
 
 class TestCommandBuilder(unittest.TestCase):
     def setUp(self):

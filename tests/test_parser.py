@@ -1,5 +1,7 @@
 import pytest
-from llama_gui.parser import HelpParser, Param, ParamGroup
+
+from llama_gui.parser import HelpParser
+
 
 def test_help_parser_basic():
     parser = HelpParser()

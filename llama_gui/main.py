@@ -1,12 +1,18 @@
-import tkinter as tk
-from tkinter import ttk, messagebox, simpledialog
 import subprocess
-from pathlib import Path
-from llama_gui.parser import HelpParser
-from llama_gui.widgets import create_param_widgets, collect_widget_values, set_widget_values, clear_all
+import tkinter as tk
+from tkinter import messagebox, simpledialog, ttk
+
 from llama_gui.command_builder import build_command
 from llama_gui.command_parser import parse_command
+from llama_gui.parser import HelpParser
 from llama_gui.profile_manager import ProfileManager
+from llama_gui.widgets import (
+    clear_all,
+    collect_widget_values,
+    create_param_widgets,
+    set_widget_values,
+)
+
 
 class LlamaGuiApp:
     def __init__(self):

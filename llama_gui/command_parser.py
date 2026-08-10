@@ -1,5 +1,7 @@
 import shlex
-from llama_gui.parser import Param, ParamGroup
+
+from llama_gui.parser import ParamGroup
+
 
 def parse_command(command: str, groups: list[ParamGroup]) -> dict[str, str | int | bool]:
     """Parse a llama-server command string into widget values dict.

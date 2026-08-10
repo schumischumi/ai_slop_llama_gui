@@ -1,8 +1,10 @@
-import unittest
-import tempfile
 import shutil
+import tempfile
+import unittest
 from pathlib import Path
+
 from llama_gui.profile_manager import ProfileManager
+
 
 class TestProfileManager(unittest.TestCase):
     def setUp(self):

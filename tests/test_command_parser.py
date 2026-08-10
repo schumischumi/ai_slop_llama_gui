@@ -1,6 +1,8 @@
 import unittest
-from llama_gui.parser import Param, ParamGroup
+
 from llama_gui.command_parser import parse_command
+from llama_gui.parser import Param, ParamGroup
+
 
 class TestCommandParser(unittest.TestCase):
     def setUp(self):

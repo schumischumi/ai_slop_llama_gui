@@ -1,25 +1,25 @@
 import re
 from dataclasses import dataclass
-from typing import List, Optional
+
 
 @dataclass
 class Param:
     long_name: str
-    short_flags: List[str]
+    short_flags: list[str]
     description: str
     param_type: str  # "int" | "bool" | "flag" | "choice" | "string"
-    default: Optional[str]
-    choices: Optional[List[str]]
+    default: str | None
+    choices: list[str] | None
     has_value: bool
     is_no_variant: bool = False
 
 @dataclass
 class ParamGroup:
     name: str
-    params: List[Param]
+    params: list[Param]
 
 class HelpParser:
-    def parse(self, help_text: str) -> List[ParamGroup]:
+    def parse(self, help_text: str) -> list[ParamGroup]:
         lines = help_text.splitlines()
         groups = []
         current_group = None

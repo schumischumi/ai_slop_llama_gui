@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-from llama_gui.parser import Param, ParamGroup
+
+from llama_gui.parser import ParamGroup
+
 
 def create_param_widgets(root: tk.Frame, groups: list[ParamGroup]) -> dict[str, tk.Variable]:
     """Create all widgets for the given param groups.
