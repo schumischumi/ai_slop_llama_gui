@@ -46,3 +46,32 @@ def create_param_widgets(root: tk.Frame, groups: list[ParamGroup]) -> dict[str, 
                 widget.param_name = param.long_name
 
     return vars_dict
+
+def set_widget_values(widgets: dict[str, tk.Variable], values: dict[str, str | int | bool]) -> None:
+    """Set Tkinter variable values from a dict.
+    Skips params not in widgets dict.
+    Converts string values to int for IntVar widgets.
+    """
+    for name, value in values.items():
+        if name not in widgets:
+            continue
+        
+        var = widgets[name]
+        
+        try:
+            if isinstance(var, tk.BooleanVar):
+                # If value is truthy/falsy
+                var.set(bool(value))
+            elif isinstance(var, tk.IntVar):
+                # If it's an int or a string that can be an int
+                if isinstance(value, int):
+                    var.set(value)
+                elif isinstance(value, str) and value.isdigit():
+                    var.set(int(value))
+                else:
+                    print(f"Warning: Cannot convert {type(value).__name__} to int for {name}")
+            else:
+                # StringVar or others
+                var.set(str(value))
+        except Exception as e:
+            print(f"Warning: Error setting {name}: {e}")
