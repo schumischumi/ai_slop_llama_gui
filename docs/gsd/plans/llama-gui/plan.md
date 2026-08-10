@@ -19,7 +19,7 @@
 | 1 | Help parser + widget factory + basic UI | done | [pending] |
 | 2 | Command builder + live preview + command parser + paste-to-UI | done | d2f06b1 |
 | 3 | Profile system (save/load/delete) | done | 3730beb |
-| 4 | Polish: copy, clear, error handling, collapsible groups | pending | - |
+| 4 | Polish: copy, clear, error handling, collapsible groups | in-progress | - |
 
 ## Dependencies
 
